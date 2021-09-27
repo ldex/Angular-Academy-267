@@ -10,6 +10,10 @@ import { Product } from '../products/product.interface';
 export class ProductService {
 
   private baseUrl = 'https://storerestservice.azurewebsites.net/api/products/';
+  // Use this instead if you can't access the REST API
+  // private baseUrl: string = "assets/db.json";
+
+
   products$: Observable<Product[]>;
 
   constructor(private http: HttpClient) {
