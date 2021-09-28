@@ -20,6 +20,10 @@ export class ProductService {
     this.initProducts();
   }
 
+  insertProduct(newProduct: Product): Observable<Product> {
+    return this.http.post<Product>(this.baseUrl, newProduct);
+  }
+
   initProducts() {
     this.products$ = this
                         .http
