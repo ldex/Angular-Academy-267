@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from '../product.interface';
 
@@ -19,7 +20,8 @@ export class ProductInsertComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) { }
 
   onSubmit() {
@@ -29,6 +31,13 @@ export class ProductInsertComponent implements OnInit {
     this
       .productService
       .insertProduct(newProduct)
+      .subscribe(
+        product => {
+          console.log('Product saved on server with id: ' + product.id);
+          this.router.navigateByUrl('/products');
+        },
+        error => console.error('Could not save product with error: ' + error)
+      )
 
   }
 
